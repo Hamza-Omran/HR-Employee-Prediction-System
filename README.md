@@ -1,5 +1,8 @@
 # HR Employee Prediction System - 2025
 
+## Academic Context
+This project was developed as part of the "Data Science Tools" course (2025).
+
 ## Team Members
 
 - Hamza Hussain Omran (22011501)
