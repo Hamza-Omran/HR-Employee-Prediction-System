@@ -1,211 +1,105 @@
-# HR Employee Prediction System - 2025
+## HR Employee Prediction System (2025)
+A data-driven HR system that integrates relational database management with machine learning models to support employee hiring decisions through both manual operations and predictive analytics.
 
-## Academic Context
-This project was developed as part of the "Data Science Tools" course (2025).
+**Context:** Data Science Tools course project (2025)
 
-## Team Members
+---
 
-- Hamza Hussain Omran (22011501)
-- Yasser Ashraf Mohammed (22010409)
-- and more...
+## Overview
 
-## Project Overview
+This project implements an HR Employee Prediction System designed to combine structured data storage with supervised machine learning models for employment outcome prediction.
 
-This project implements an HR Employee Prediction System that combines database management with machine learning models to predict employee hiring outcomes. The system provides both manual HR operations and AI-powered prediction capabilities.
+The system supports traditional HR database operations alongside AI-powered predictions, allowing structured employee data to be stored, analyzed, and used for classification-based hiring decisions. The focus of the project is on **end-to-end data handling**, from database design and preprocessing to model training, evaluation, and deployment-ready prediction workflows.
 
-## Features
+---
 
-### Database Management
-- SQLite database implementation for storing employee records
-- Normalized database schema with multiple related tables
-- CRUD operations (Create, Read, Update, Delete) for employee records
-- Import functionality from CSV files
-- Support for up to 50,000 employee records
+## System Architecture
 
-### Data Analysis and Visualization
-- Comprehensive Exploratory Data Analysis (EDA)
-- Statistical analysis of employee attributes
-- Distribution visualizations using histograms, bar plots, and pie charts
-- Correlation heatmaps
-- Country segmentation by continent
-- Employment status analysis across different demographics
+The system is composed of three tightly integrated components:
 
-### Machine Learning Models
-The system implements three classification models:
+- A **normalized SQLite database** for employee data storage
+- A **data analysis and preprocessing pipeline** for feature preparation
+- A **machine learning layer** for employee status prediction
 
-1. Logistic Regression
-2. Decision Tree Classifier
-3. Random Forest Classifier
+This architecture reflects a practical data science workflow where persistent storage, analytics, and modeling coexist within a single system.
 
-Each model includes:
-- Hyperparameter tuning using GridSearchCV
-- Performance metrics (Accuracy, Precision, Recall, F1-Score)
-- ROC curves and AUC scores
-- Confusion matrices
-- Model persistence using joblib
+---
 
-### Data Preprocessing
-- Handling missing values
-- Duplicate removal
-- Outlier detection and removal using IQR method
-- Label encoding for categorical variables
-- Feature selection and engineering
-- Train-test split for model validation
+## Core Functionality
 
-## Database Schema
+The system operates in two primary modes.
 
-### Main Tables
-- EmployeesRecords: Initial data import table
-- Employees: Normalized employee information
-- EducationLevels: Education level lookup table
-- Genders: Gender lookup table
-- MainBranches: Main branch lookup table
-- Countries: Country lookup table
-- Skills: Skills lookup table
-- EmployeeSkills: Many-to-many relationship between employees and skills
+**Manual HR Mode** enables full control over employee records, including insertion, retrieval, update, and deletion of data stored in the relational database.
 
-## Key Attributes
+**AI-Powered HR Mode** allows trained machine learning models to be applied to candidate data in order to predict hiring outcomes without retraining, enabling repeated inference runs from saved models.
 
-Employee records include:
-- Age
-- Accessibility
-- Education Level
-- Gender
-- Work Experience
-- Mental Health Status
-- Main Branch (Professional Developer status)
-- Years of Coding
-- Years of Professional Coding
-- Country/Continent
-- Previous Salary
-- Computer Skills Count
-- Employment Status (Target Variable)
+---
 
-## System Modes
+## Data Management
 
-### Manual HR Mode
-- Add new employee records
-- Retrieve employee information
-- Update existing records
-- Delete employee records
-- View database records with pretty-printed tables
+Employee data is stored in a structured SQLite database using a normalized schema. The design separates categorical attributes into lookup tables and models many-to-many relationships explicitly, ensuring scalability and data integrity.
 
-### AI-Powered HR Mode
-- Select from trained machine learning models
-- Input candidate information
-- Receive hiring predictions (Accepted/Rejected)
-- Multiple prediction runs without retraining
+The database supports large-scale imports from CSV files and is designed to handle tens of thousands of records efficiently.
 
-## Technical Stack
-
-### Libraries and Frameworks
-- sqlite3: Database management
-- pandas: Data manipulation and analysis
-- numpy: Numerical operations
-- scikit-learn: Machine learning models and preprocessing
-- matplotlib: Data visualization
-- seaborn: Statistical visualizations
-- joblib: Model persistence
-- tabulate: Pretty-printing tables
-- csv: CSV file handling
-
-## Model Performance
-
-The system evaluates models using:
-- Accuracy Score
-- Classification Report (Precision, Recall, F1-Score)
-- Confusion Matrix
-- ROC Curve
-- AUC Score
-
-Best performing features identified:
-- Computer Skills
-- Main Branch (Professional Developer status)
-- Previous Salary
-- Age
-- Accessibility
+---
 
 ## Data Processing Pipeline
 
-1. Database initialization and CSV import
-2. Data loading to DataFrame
-3. Exploratory Data Analysis
-4. Data preprocessing and cleaning
-5. Feature encoding and selection
-6. Outlier removal
-7. Train-test split
-8. Model training and evaluation
-9. Model persistence
-10. Prediction interface
+Raw employee data undergoes a structured preprocessing workflow that includes:
 
-## Usage
+- Missing value handling and duplicate removal  
+- Outlier detection using the interquartile range (IQR) method  
+- Encoding of categorical variables  
+- Feature selection and transformation  
+- Train–test splitting for model evaluation  
 
-The system provides an interactive menu-driven interface:
+This pipeline ensures that the data used for modeling is clean, consistent, and suitable for supervised learning.
 
-1. Manual HR Mode: Perform CRUD operations on employee records
-2. AI-Powered HR Mode: Use trained models for hiring predictions
-3. Model Training: Select and train specific models
-4. Exit: Close the application
+---
 
-## Data Source
+## Machine Learning Models
 
-The system uses employee data from Stack Overflow developer surveys, containing information about:
-- Demographics
-- Education background
-- Professional experience
-- Technical skills
-- Employment status
+Three classification models are implemented and evaluated:
 
-## Visualization Capabilities
+- Logistic Regression  
+- Decision Tree Classifier  
+- Random Forest Classifier  
 
-- Age distribution analysis
-- Education level distribution
-- Employment status by age groups
-- Geographic distribution by continent
-- Average computer skills by continent
-- Employment percentage by continent
-- Correlation heatmaps
-- Feature distributions
+Each model is trained using hyperparameter tuning via grid search and evaluated using standard classification metrics including accuracy, precision, recall, F1-score, ROC curves, and AUC values.
 
-## Model Saving and Loading
+Trained models are persisted using joblib to enable reuse without retraining.
 
-Trained models are saved using joblib for:
-- Quick reloading without retraining
-- Deployment in production environments
-- Consistent predictions across sessions
+---
 
-## Requirements
+## Key Insights
 
-- Python 3.x
-- SQLite3
-- pandas
-- numpy
-- scikit-learn
-- matplotlib
-- seaborn
-- joblib
-- tabulate
+Model evaluation indicates that technical skill indicators, professional background, previous salary, and age are among the strongest predictors of employment outcomes.
 
-## Project Structure
+Tree-based models demonstrate improved performance and interpretability compared to linear approaches, particularly in capturing non-linear relationships between candidate attributes and hiring decisions.
 
-- Copy_of_notebook_v_3_final.ipynb: Main analysis and database implementation
-- Interactive_NEGEhr.ipynb: Interactive HR system implementation
-- HR.db: SQLite database file
-- stackoverflow_full.csv: Source data file
-- EmployeesDB.jpg: Database schema diagram
-- Model files: Saved trained models (.joblib)
+---
 
-## Future Enhancements
+## Visualization and Analysis
 
-Potential improvements include:
-- Web-based interface
-- Real-time data updates
-- Additional machine learning algorithms
-- Deep learning integration
-- Advanced feature engineering
-- API development for external integrations
-- Dashboard for analytics and reporting
+The system includes extensive exploratory data analysis and visualization, covering:
 
-## Conclusion
+- Demographic distributions  
+- Employment status by age, education, and geography  
+- Skill distribution analysis  
+- Correlation heatmaps for feature relationships  
+- Regional comparisons by continent  
 
-This HR Employee Prediction System demonstrates the integration of database management, data analysis, and machine learning to create a practical tool for HR decision-making. The system provides both manual control and automated predictions, making it suitable for various organizational needs.
+These visualizations support both model interpretation and data-driven HR insights.
+
+---
+
+## Tech Stack
+
+Python, SQLite, pandas, NumPy, scikit-learn, matplotlib, seaborn, joblib, tabulate
+
+---
+
+## How to Run
+
+```bash
+pip install pandas numpy scikit-learn matplotlib seaborn joblib tabulate
